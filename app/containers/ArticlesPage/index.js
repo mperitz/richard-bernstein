@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Helmet } from 'react-helmet';
 
 import { selectArticles, selectUser } from '../App/selectors';
 import Articles from '../../components/List';
@@ -9,6 +10,12 @@ import { deleteArticle } from '../App/actions';
 
 const ArticlesPage = ({ articles, handleDeleteClick, user }) => (
   <div>
+    <Helmet>
+      <title>Richard Bernstein - Articles</title>
+      <meta property="og:url" content="" />
+      <meta property="article:author" content="Richard Bernstein" />
+      <meta property="article:tag" content={this.props.articles.map((article) => article.title).join(', ')} />
+    </Helmet>
     <Articles listArr={articles} handleDelete={handleDeleteClick} authorized={user} />
   </div>
 );
