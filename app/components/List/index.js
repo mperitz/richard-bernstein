@@ -9,6 +9,7 @@ class List extends Component {
   static propTypes = {
     listArr: PropTypes.array.isRequired,
     handleDelete: PropTypes.func.isRequired,
+    authorized: PropTypes.bool.isRequired,
   }
 
   state = { showButtons: '' };
@@ -27,8 +28,8 @@ class List extends Component {
       !!this.props.listArr.length && <ListContainer>
         {this.props.listArr.map((item) => (
           <ListItem onMouseEnter={() => this.handleMouseOver(item.title)} onMouseLeave={this.handleMouseLeave} key={item.title}>
-            {this.state.showButtons === item.title && <DeleteButton onClick={(evt) => this.handleDelete(evt, item._id)} />}
-            {this.state.showButtons === item.title && <Link to={`/articles/${item._id}/edit`}>
+            {this.props.authorized && this.state.showButtons === item.title && <DeleteButton onClick={(evt) => this.handleDelete(evt, item._id)} />}
+            {this.props.authorized && this.state.showButtons === item.title && <Link to={`/articles/${item._id}/edit`}>
               <EditButton />
             </Link>}
             <Anchor href={item.href} target="_blank">
@@ -41,11 +42,11 @@ class List extends Component {
             <ListItemContent>{item.excerpt}</ListItemContent>
           </ListItem>
         ))}
-        <ListItem>
+        {this.props.authorized && <ListItem>
           <Link to="/articles/new">
             <ListItemHeader>Add Article</ListItemHeader>
           </Link>
-        </ListItem>
+        </ListItem>}
       </ListContainer>
     );
   }

@@ -17,6 +17,7 @@ export default class CardList extends Component {
   static propTypes = {
     cardsArr: PropTypes.array.isRequired,
     handleDelete: PropTypes.func.isRequired,
+    authorized: PropTypes.bool.isRequired,
   };
 
   static truncateHeader = (header) => header.length > 65 ? `${header.substring(0, 65)}...` : header;
@@ -41,8 +42,8 @@ export default class CardList extends Component {
           <CardFlexContainer key={card._id} onMouseEnter={() => this.handleMouseOver(card._id)} onMouseLeave={this.handleMouseLeave}>
             <Link to={`/books/${card._id}`} key={card._id}>
               <CardWrapper src={card.imgSrc}>
-                {this.state.showButtons === card._id && <DeleteButton onClick={(evt) => this.handleDelete(evt, card._id)} />}
-                {this.state.showButtons === card._id && <Link to={`/books/${card._id}/edit`}>
+                {this.props.authorized && this.state.showButtons === card._id && <DeleteButton onClick={(evt) => this.handleDelete(evt, card._id)} />}
+                {this.props.authorized && this.state.showButtons === card._id && <Link to={`/books/${card._id}/edit`}>
                   <EditButton />
                 </Link>}
                 <TextWrapper>
@@ -53,9 +54,9 @@ export default class CardList extends Component {
             </Link>
           </CardFlexContainer>
         ))}
-        <Link to="/books/new">
+        {this.props.authorized && <Link to="/books/new">
           <CardWrapper src={Add} backgroundSize="auto" />
-        </Link>
+        </Link>}
       </CardsContainer>
     );
   }

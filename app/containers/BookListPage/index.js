@@ -4,19 +4,20 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import BooksList from '../../components/CardList';
-import { selectBooks } from '../App/selectors';
+import { selectBooks, selectUser } from '../App/selectors';
 import { deleteBook } from '../App/actions';
 
 class BookListPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     books: PropTypes.array.isRequired,
     handleDeleteClick: PropTypes.func.isRequired,
+    user: PropTypes.bool.isRequired,
   }
 
   render() {
     return (
       <div>
-        <BooksList cardsArr={this.props.books} handleDelete={this.props.handleDeleteClick} />
+        <BooksList cardsArr={this.props.books} handleDelete={this.props.handleDeleteClick} authorized={this.props.user} />
       </div>
     );
   }
@@ -24,6 +25,7 @@ class BookListPage extends React.PureComponent { // eslint-disable-line react/pr
 
 const mapStateToProps = createStructuredSelector({
   books: selectBooks(),
+  user: selectUser(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
