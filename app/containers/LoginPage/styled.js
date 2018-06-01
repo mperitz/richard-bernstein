@@ -5,7 +5,7 @@ export const LoginForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: calc(100vh - 180px);
 `;
 
 export const Input = styled.input`
