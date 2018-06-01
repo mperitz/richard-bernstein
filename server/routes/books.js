@@ -41,12 +41,6 @@ router.post('/image', async (req, res) => {
     res.sendStatus(400);
   }
   const { file } = req.files;
-  // const awsData = {
-  //   Body: file.data,
-  //   Key: file.name,
-  //   Bucket: process.env.BUCKET,
-  //   ACL: 'public-read',
-  // };
   try {
     await asyncPutObject(generateAwsParams(file.name, process.env.BUCKET, file.data));
     res.json({ ok: 1, url: `https://s3.us-east-2.amazonaws.com/richard-bernstein-books/${file.name}` });
