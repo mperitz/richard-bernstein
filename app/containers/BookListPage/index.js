@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Helmet } from 'react-helmet';
 
 import BooksList from '../../components/CardList';
 import { selectBooks, selectUser } from '../App/selectors';
@@ -17,6 +18,12 @@ class BookListPage extends React.PureComponent { // eslint-disable-line react/pr
   render() {
     return (
       <div>
+        <Helmet>
+          <title>Richard Bernstein - Books</title>
+          <meta property="og:url" content="" />
+          <meta property="book:author" content="Richard Bernstein" />
+          <meta property="book:tag" content={this.props.books.map((book) => book.title).join(', ')} />
+        </Helmet>
         <BooksList cardsArr={this.props.books} handleDelete={this.props.handleDeleteClick} authorized={this.props.user} />
       </div>
     );

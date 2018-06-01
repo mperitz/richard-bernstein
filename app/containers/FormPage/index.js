@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import BookForm from '../../components/BookForm';
 import ArticleForm from '../../components/ArticleForm';
@@ -31,6 +32,9 @@ class FormPage extends Component {
     const isBooksRoute = this.props.location.pathname.includes('books');
     return (
       <FormWrapper>
+        <Helmet>
+          <title>Richard Bernstein - Edit</title>
+        </Helmet>
         {this.props.postPutSuccess && <Redirect to={isBooksRoute ? '/books' : '/articles'} />}
         {!this.props.user && <Redirect to="/not-found" />}
         {isBooksRoute ? <BookForm id={this.props.match.params.id} /> : <ArticleForm id={this.props.match.params.id} />}

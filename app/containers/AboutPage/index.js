@@ -11,6 +11,7 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import messages from './messages';
 import {
@@ -25,6 +26,11 @@ export default class About extends React.PureComponent { // eslint-disable-line 
   render() {
     return (
       <AboutContainer>
+        <Helmet>
+          <title>Richard Bernstein - About</title>
+          <meta property="og:url" content="" />
+          <meta property="book:author" content="Richard Bernstein" />
+        </Helmet>
         <HeadshotContainer>
           <Headshot src={Richard} />
         </HeadshotContainer>

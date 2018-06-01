@@ -13,6 +13,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Helmet } from 'react-helmet';
 
 import { Container, ContentWrapper } from './styled';
 import Carousel from '../../components/Carousel';
@@ -22,6 +23,11 @@ import { selectBooks } from '../../containers/App/selectors';
 
 const HomePage = ({ books }) => (
   <Container>
+    <Helmet>
+      <title>Richard Bernstein - Home</title>
+      <meta property="og:url" content="" />
+      <meta property="books:author" content="a url here" />
+    </Helmet>
     <Carousel carouselArr={books} CarouselItem={CarouselItem} carouselHeight={500} slideTime={0.5} arrowOffset={330} />
     <ContentWrapper>
       <Author />

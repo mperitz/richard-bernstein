@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 
 import { LoginForm, Input } from './styled';
@@ -19,6 +20,9 @@ class Login extends Component {
   render() {
     return (
       <LoginForm onSubmit={this.onSubmit}>
+        <Helmet>
+          <title>Richard Bernstein - Login</title>
+        </Helmet>
         {this.props.user && <Redirect to="/" />}
         <Input name="username" placeholder="Enter Username" type="text" />
         <Input name="password" placeholder="Enter Password" type="password" />

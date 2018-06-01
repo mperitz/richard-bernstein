@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import messages from './messages';
 import { NotFoundContainer, NotFoundText } from './styled';
@@ -8,6 +9,9 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
   render() {
     return (
       <NotFoundContainer>
+        <Helmet>
+          <title>Richard Bernstein - Not Found</title>
+        </Helmet>
         <NotFoundText>
           <FormattedMessage {...messages.header} />
         </NotFoundText>
