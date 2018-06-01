@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, reducer } from 'redux-form/immutable';
+import { reduxForm, reducer, Field as FormField } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -59,8 +59,8 @@ class BookForm extends Component {
           <Field name="subtitle" component="input" type="text" />
         </FieldContainer>
         <FieldContainer>
-          <Label htmlFor="imgSrc">Image URL</Label>
-          <Field name="imgSrc" component="input" type="text" />
+          <Label htmlFor="img">Image</Label>
+          <FormField name="img" component="input" type="file" />
         </FieldContainer>
         <FieldContainer>
           <Label htmlFor="description">Description</Label>

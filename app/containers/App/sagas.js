@@ -27,6 +27,16 @@ export function* getOneBook({ bookId }) {
 export function* createOrUpdateBook({ bookValues }) {
   try {
     const data = bookValues.toJS();
+    const formData = new FormData();
+    formData.append('file', data.img[0]);
+    formData.append('name', data.img[0].name);
+    if (data._id) formData.append('_id', data._id);
+    const imgUploadResult = yield call(request, '/api/books/image', {
+      credentials: 'same-origin',
+      method: data._id ? 'put' : 'post',
+      body: formData,
+    });
+    if (!imgUploadResult.ok) throw new Error('Image upload failed');
     const praise = keys(data)
       .filter((bookProp) => bookProp.match(/quoteBy/))
       .map((quote, index) => ({
@@ -34,11 +44,11 @@ export function* createOrUpdateBook({ bookValues }) {
         quoteBy: data[`quoteBy${index}`],
       }))
       .filter(({ quote, quoteBy }) => quote && quoteBy);
-    const { title, subtitle, imgSrc, isbn, description, publisher, url } = data;
+    const { title, subtitle, isbn, description, publisher, url } = data;
     const body = JSON.stringify({
       title,
       subtitle,
-      imgSrc,
+      imgSrc: imgUploadResult.url,
       isbn,
       description,
       publisher,

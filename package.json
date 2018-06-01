@@ -184,7 +184,8 @@
       "minimist",
       "sanitize.css",
       "mongoose",
-      "bcrypt"
+      "bcrypt",
+      "multer"
     ],
     "include": [
       "core-js",
@@ -221,6 +222,7 @@
     "testRegex": "tests/.*\\.test\\.js$"
   },
   "dependencies": {
+    "aws-sdk": "^2.247.1",
     "axios": "^0.18.0",
     "babel-polyfill": "6.23.0",
     "bcrypt": "^2.0.1",
@@ -229,6 +231,7 @@
     "compression": "1.6.2",
     "cross-env": "5.0.0",
     "express": "4.15.3",
+    "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",
     "fontfaceobserver": "2.0.9",
     "history": "4.6.3",
