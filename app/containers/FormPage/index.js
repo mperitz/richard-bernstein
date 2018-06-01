@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import BookForm from '../../components/BookForm';
 import ArticleForm from '../../components/ArticleForm';
 import { FormWrapper } from './styled';
-import { selectPostPutSuccess } from '../App/selectors';
+import { selectPostPutSuccess, selectUser } from '../App/selectors';
 import { setPostPutSuccess, clearOneBook, clearOneArticle } from '../App/actions';
 
 class FormPage extends Component {
@@ -18,6 +18,7 @@ class FormPage extends Component {
     dispatchClearBook: PropTypes.func.isRequired,
     dispatchClearArticle: PropTypes.func.isRequired,
     postPutSuccess: PropTypes.bool.isRequired,
+    user: PropTypes.bool.isRequired,
   };
 
   componentWillUnmount() {
@@ -31,6 +32,7 @@ class FormPage extends Component {
     return (
       <FormWrapper>
         {this.props.postPutSuccess && <Redirect to={isBooksRoute ? '/books' : '/articles'} />}
+        {!this.props.user && <Redirect to="/not-found" />}
         {isBooksRoute ? <BookForm id={this.props.match.params.id} /> : <ArticleForm id={this.props.match.params.id} />}
       </FormWrapper>
     );
@@ -39,6 +41,7 @@ class FormPage extends Component {
 
 const mapStateToProps = createStructuredSelector({
   postPutSuccess: selectPostPutSuccess(),
+  user: selectUser(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
