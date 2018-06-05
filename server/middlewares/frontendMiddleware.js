@@ -1,6 +1,5 @@
 /* eslint-disable global-require */
 const bodyParser = require('body-parser');
-const path = require('path');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fileUpload = require('express-fileupload');
@@ -32,10 +31,6 @@ module.exports = (app, options) => {
     saveUninitialized: true,
     expires: false,
   }));
-
-  app.get('/sw', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../sw.js'));
-  });
 
   app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
