@@ -68,7 +68,6 @@ export function* createOrUpdateBook({ bookValues }) {
       throw new Error('Update book failed: Something went wrong in the database');
     } else {
       yield put(setPostPutSuccess(true));
-      yield call(getOneBook, { bookId: data._id });
       yield call(getBooks);
     }
   } catch (err) {
@@ -134,7 +133,6 @@ export function* createOrUpdateArticle({ articleValues }) {
     } else {
       yield put(setPostPutSuccess(true));
       yield call(getArticles);
-      yield call(getOneArticle, { articleId: data._id });
     }
   } catch (err) {
     yield put(setPostPutError(err.message));
