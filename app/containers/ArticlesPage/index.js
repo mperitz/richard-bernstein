@@ -14,7 +14,7 @@ const ArticlesPage = ({ articles, handleDeleteClick, user }) => (
       <title>Richard Bernstein - Articles</title>
       <meta property="og:url" content="" />
       <meta property="article:author" content="Richard Bernstein" />
-      <meta property="article:tag" content={this.props.articles.map((article) => article.title).join(', ')} />
+      <meta property="article:tag" content={articles.map((article) => article.title).join(', ')} />
     </Helmet>
     <Articles listArr={articles} handleDelete={handleDeleteClick} authorized={user} />
   </div>

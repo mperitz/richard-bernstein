@@ -27,8 +27,8 @@ class ArticleForm extends Component {
     if (this.props.id) this.props.dispatchFetchArticle(this.props.id);
   }
 
-  componentWillReceiveProps({ selectedArticle, dispatch, change }) {
-    if (this.firstLoad) {
+  componentWillReceiveProps({ selectedArticle, dispatch, change, id }) {
+    if (this.firstLoad && id) {
       const selectedArticleProps = keys(selectedArticle);
       for (let i = 0; i < selectedArticleProps.length; i += 1) {
         dispatch(change(selectedArticleProps[i], selectedArticle[selectedArticleProps[i]]));
