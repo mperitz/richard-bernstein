@@ -1,10 +1,16 @@
 const { red } = require('chalk');
 
+const logError = (msg, err) => {
+  console.log(red(msg, err));
+  console.log(red('*************STACK*************'));
+  console.log(red(err.stack));
+};
+
 const createGetAllRoute = (router, Model) => router.get('/', async (req, res) => {
   try {
     res.json(await Model.find({}));
   } catch (err) {
-    console.log(red('GET ALL ERROR', err.stack));
+    logError('GET ALL ERROR', err);
     res.sendStatus(500);
   }
 });
@@ -15,7 +21,7 @@ const createGetOneRoute = (router, Model) => router.get('/:id', async (req, res)
       _id: req.params.id,
     }));
   } catch (err) {
-    console.log(red('GET ONE ERROR', err.stack));
+    logError('GET ONE ERROR', err);
     res.sendStatus(500);
   }
 });
@@ -28,7 +34,7 @@ const createPostRoute = (router, Model) => router.post('/', async (req, res) => 
     if (item.length) res.status(400).json({ ok: 0 });
     else res.status(201).json(await Model.create(req.body));
   } catch (err) {
-    console.log(red('POST ERROR', err.stack));
+    logError('POST ERROR', err);
     res.sendStatus(500);
   }
 });
@@ -41,7 +47,7 @@ const createPutRoute = (router, Model) => router.put('/:id', async (req, res) =>
     if (!updated) res.sendStatus(400);
     else res.status(201).json(updated);
   } catch (err) {
-    console.log(red('PUT ERROR', err.stack));
+    logError('PUT ERROR', err);
     res.sendStatus(500);
   }
 });
@@ -54,7 +60,7 @@ const createDeleteRoute = (router, Model) => router.delete('/:id', async (req, r
     if (!deleted.ok) res.sendStatus(400);
     else res.sendStatus(204);
   } catch (err) {
-    console.log(red('DELETE ERROR', err.stack));
+    logError('DELETE ERROR', err);
     res.sendStatus(500);
   }
 });
