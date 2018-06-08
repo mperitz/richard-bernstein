@@ -49,6 +49,11 @@ const selectUser = () => createSelector(
   (homeState) => homeState.get('user')
 );
 
+const selectLoading = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('loading')
+);
+
 const selectPostPutSuccess = () => createSelector(
   selectHome,
   (homeState) => homeState.get('postPutSuccess')
@@ -70,6 +75,7 @@ export {
   selectArticles,
   selectSelectedArticle,
   selectUser,
+  selectLoading,
   selectPostPutSuccess,
   selectPostPutError,
 };

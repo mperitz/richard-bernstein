@@ -46,7 +46,7 @@ class Book extends Component {
             <HeaderInfoText>{selectedBook.publisher.description}
             </HeaderInfoText>
             <HeaderButtonWrapper>
-              <VisitButton href={`https://www.penguinrandomhouse.com${selectedBook.seoFriendlyUrl}`} />
+              <VisitButton href={`${selectedBook.url}`} />
             </HeaderButtonWrapper>
           </HeaderTextWrapper>
         </HeaderWrapper>

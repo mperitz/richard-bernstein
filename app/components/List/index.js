@@ -32,7 +32,7 @@ class List extends Component {
             {this.props.authorized && this.state.showButtons === item.title && <Link to={`/articles/${item._id}/edit`}>
               <EditButton />
             </Link>}
-            <Anchor href={item.href} target="_blank">
+            <Anchor href={item.url} target="_blank">
               <ListItemHeader>{item.title}</ListItemHeader>
             </Anchor>
             <SubHeaderContainer>

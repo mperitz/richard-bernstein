@@ -10,7 +10,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
     return (
       <NotFoundContainer>
         <Helmet>
-          <title>Richard Bernstein - Not Found</title>
+          <title>Not Found - Richard Bernstein</title>
         </Helmet>
         <NotFoundText>
           <FormattedMessage {...messages.header} />

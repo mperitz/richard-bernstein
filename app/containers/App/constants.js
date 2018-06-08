@@ -37,5 +37,6 @@ export const WHO_AM_I = 'WHO_AM_I';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER = 'SET_USER';
 
+export const SET_LOADING = 'SET_LOADING';
 export const SET_POST_PUT_SUCCESS = 'SET_POST_PUT_SUCCESS';
 export const SET_POST_PUT_ERROR = 'SET_POST_PUT_ERROR';

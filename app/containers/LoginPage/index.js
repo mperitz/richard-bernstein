@@ -21,7 +21,7 @@ class Login extends Component {
     return (
       <LoginForm onSubmit={this.onSubmit}>
         <Helmet>
-          <title>Richard Bernstein - Login</title>
+          <title>Login - Richard Bernstein</title>
         </Helmet>
         {this.props.user && <Redirect to="/" />}
         <Input name="username" placeholder="Enter Username" type="text" />

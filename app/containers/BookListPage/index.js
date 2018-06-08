@@ -19,7 +19,7 @@ class BookListPage extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         <Helmet>
-          <title>Richard Bernstein - Books</title>
+          <title>Books - Richard Bernstein</title>
           <meta property="og:url" content="" />
           <meta property="book:author" content="Richard Bernstein" />
           <meta property="book:tag" content={this.props.books.map((book) => book.title).join(', ')} />

@@ -24,7 +24,7 @@ import { selectBooks } from '../../containers/App/selectors';
 const HomePage = ({ books }) => (
   <Container>
     <Helmet>
-      <title>Richard Bernstein - Home</title>
+      <title>Home - Richard Bernstein</title>
       <meta property="og:url" content="" />
       <meta property="books:author" content="a url here" />
     </Helmet>

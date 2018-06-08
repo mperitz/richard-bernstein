@@ -28,8 +28,8 @@ class BookForm extends Component {
     if (this.props.id) this.props.dispatchFetchBook(this.props.id);
   }
 
-  componentWillReceiveProps({ selectedBook, dispatch, change }) {
-    if (this.firstLoad) {
+  componentWillReceiveProps({ selectedBook, dispatch, change, id }) {
+    if (this.firstLoad && id) {
       const selectedBookProps = keys(selectedBook);
       for (let i = 0; i < selectedBookProps.length; i += 1) {
         dispatch(change(selectedBookProps[i], selectedBook[selectedBookProps[i]]));
