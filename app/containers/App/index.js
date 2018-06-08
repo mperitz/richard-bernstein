@@ -34,7 +34,8 @@ import { getBooks, getAuthor, getArticles, whoAmI, logout } from './actions';
 import { selectUser, selectPostPutError } from './selectors';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { AppContainer, ModalText } from './styled';
+import { AppContainer, ModalText, SpinnerContainer, SpinnerImg } from './styled';
+import Spinner from '../../images/Spinner-1s-200px.gif';
 
 const modalStyles = {
   overlay: {
@@ -78,6 +79,9 @@ class App extends Component {
   render() {
     return (
       <AppContainer modalOpen={!!this.props.postPutError}>
+        <SpinnerContainer>
+          <SpinnerImg src={Spinner} />
+        </SpinnerContainer>
         <Modal
           isOpen={!!this.props.postPutError}
           contentLabel="Error"
