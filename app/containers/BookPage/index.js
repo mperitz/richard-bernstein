@@ -12,7 +12,7 @@ const BookPage = ({ books, match }) => {
   return (
     !!books.length && <div>
       <Helmet>
-        <title>{`Richard Bernstein - ${selectedBook.title}`}</title>
+        <title>{`${selectedBook.title} - Richard Bernstein`}</title>
         <meta property="og:url" content="" />
         <meta property="og:title" content={selectedBook.title} />
         <meta property="book:tag" content="" />

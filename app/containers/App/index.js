@@ -31,11 +31,11 @@ import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './sagas';
 import { getBooks, getAuthor, getArticles, whoAmI, logout } from './actions';
-import { selectUser, selectPostPutError } from './selectors';
+import { selectUser, selectPostPutError, selectLoading } from './selectors';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { AppContainer, ModalText, SpinnerContainer, SpinnerImg } from './styled';
-import Spinner from '../../images/Spinner-1s-200px.gif';
+import Spinner from '../../images/Spinner.gif';
 
 const modalStyles = {
   overlay: {
@@ -66,6 +66,7 @@ class App extends Component {
     dispatchGetAuthor: PropTypes.func.isRequired,
     dispatchGetArticles: PropTypes.func.isRequired,
     user: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
     postPutError: PropTypes.string.isRequired,
   };
 
@@ -78,10 +79,10 @@ class App extends Component {
 
   render() {
     return (
-      <AppContainer modalOpen={!!this.props.postPutError}>
-        <SpinnerContainer>
+      <AppContainer disabled={!!this.props.postPutError || this.props.loading}>
+        {this.props.loading && <SpinnerContainer>
           <SpinnerImg src={Spinner} />
-        </SpinnerContainer>
+        </SpinnerContainer>}
         <Modal
           isOpen={!!this.props.postPutError}
           contentLabel="Error"
@@ -115,6 +116,7 @@ class App extends Component {
 const mapStateToProps = createStructuredSelector({
   user: selectUser(),
   postPutError: selectPostPutError(),
+  loading: selectLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

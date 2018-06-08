@@ -27,7 +27,7 @@ export default class About extends React.PureComponent { // eslint-disable-line 
     return (
       <AboutContainer>
         <Helmet>
-          <title>Richard Bernstein - About</title>
+          <title>About - Richard Bernstein</title>
           <meta property="og:url" content="" />
           <meta property="book:author" content="Richard Bernstein" />
         </Helmet>

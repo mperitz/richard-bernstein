@@ -4,7 +4,7 @@ import keys from 'lodash/keys';
 
 import request from 'utils/request';
 import { GET_BOOKS, GET_ONE_BOOK, CREATE_OR_UPDATE_BOOK, DELETE_BOOK, GET_AUTHOR, GET_ARTICLES, GET_ONE_ARTICLE, CREATE_OR_UPDATE_ARTICLE, DELETE_ARTICLE, LOGIN, LOGOUT, WHO_AM_I } from './constants';
-import { setBooks, setAuthor, setArticles, setOneBook, setOneArticle, setUser, setPostPutSuccess, setPostPutError } from './actions';
+import { setBooks, setAuthor, setArticles, setOneBook, setOneArticle, setUser, setPostPutSuccess, setPostPutError, setLoading } from './actions';
 
 export function* getBooks() {
   try {
@@ -26,6 +26,7 @@ export function* getOneBook({ bookId }) {
 
 export function* createOrUpdateBook({ bookValues }) {
   try {
+    yield put(setLoading(true));
     const data = bookValues.toJS();
     const formData = new FormData();
     formData.append('file', data.img[0]);
@@ -73,15 +74,20 @@ export function* createOrUpdateBook({ bookValues }) {
   } catch (err) {
     yield put(setPostPutError(err.message));
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 
 export function* deleteBook({ bookId }) {
   try {
+    yield put(setLoading(true));
     yield call(request, `/api/books/${bookId}`, { method: 'delete', credentials: 'same-origin' });
     yield call(getBooks);
   } catch (err) {
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 
@@ -98,7 +104,7 @@ export function* getArticles() {
   try {
     const articles = yield call(request, '/api/articles', { credentials: 'same-origin' });
     const enhancedArticles = articles
-      .map((article) => ({ ...article, date: moment(article.date).format('L') }));
+      .map((article) => ({ ...article, date: moment(article.date).format('M/DD/YYYY') }));
     yield put(setArticles(enhancedArticles));
   } catch (err) {
     console.error(err);
@@ -120,6 +126,7 @@ export function* createOrUpdateArticle({ articleValues }) {
   const body = JSON.stringify(data);
   const reqUrl = `/api/articles/${data._id || ''}`;
   try {
+    yield put(setLoading(true));
     const createdOrUpdated = yield call(request, reqUrl, {
       method: data._id ? 'put' : 'post',
       headers: {
@@ -137,20 +144,26 @@ export function* createOrUpdateArticle({ articleValues }) {
   } catch (err) {
     yield put(setPostPutError(err.message));
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 
 export function* deleteArticle({ articleId }) {
   try {
+    yield put(setLoading(true));
     yield call(request, `/api/articles/${articleId}`, { method: 'delete', credentials: 'same-origin' });
     yield call(getArticles);
   } catch (err) {
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 
 export function* login({ username, password }) {
   try {
+    yield put(setLoading(true));
     const loginResult = yield call(request, '/api/login', {
       method: 'post',
       headers: {
@@ -167,11 +180,14 @@ export function* login({ username, password }) {
   } catch (err) {
     yield put(setPostPutError(err.message));
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 
 export function* logout() {
   try {
+    yield put(setLoading(true));
     const logoutResult = yield call(request, '/api/logout', {
       credentials: 'same-origin',
     });
@@ -180,6 +196,8 @@ export function* logout() {
   } catch (err) {
     yield put(setPostPutError(err.message));
     console.error(err);
+  } finally {
+    yield put(setLoading(false));
   }
 }
 

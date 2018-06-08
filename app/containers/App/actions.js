@@ -20,6 +20,7 @@ import {
   WHO_AM_I,
   LOGOUT,
   SET_USER,
+  SET_LOADING,
   SET_POST_PUT_SUCCESS,
   SET_POST_PUT_ERROR,
 } from './constants';
@@ -119,6 +120,11 @@ export const logout = () => ({
 
 export const setUser = (bool) => ({
   type: SET_USER,
+  bool,
+});
+
+export const setLoading = (bool) => ({
+  type: SET_LOADING,
   bool,
 });
 

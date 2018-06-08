@@ -22,6 +22,7 @@ import {
   WHO_AM_I,
   LOGOUT,
   SET_USER,
+  SET_LOADING,
   SET_POST_PUT_SUCCESS,
   SET_POST_PUT_ERROR,
 } from './constants';
@@ -62,6 +63,7 @@ const initialState = fromJS({
   author: {},
   articles: [],
   user: false,
+  loading: false,
   postPutSuccess: false,
   postPutError: '',
 });
@@ -114,6 +116,8 @@ function reducer(state = initialState, action) {
       return state;
     case SET_USER:
       return state.set('user', action.bool);
+    case SET_LOADING:
+      return state.set('loading', action.bool);
     case SET_POST_PUT_SUCCESS:
       return state.set('postPutSuccess', action.bool);
     case SET_POST_PUT_ERROR:

@@ -33,7 +33,7 @@ class FormPage extends Component {
     return (
       <FormWrapper>
         <Helmet>
-          <title>Richard Bernstein - Edit</title>
+          <title>Edit - Richard Bernstein</title>
         </Helmet>
         {this.props.postPutSuccess && <Redirect to={isBooksRoute ? '/books' : '/articles'} />}
         {!this.props.user && <Redirect to="/not-found" />}
