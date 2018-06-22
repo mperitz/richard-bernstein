@@ -3,11 +3,13 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fileUpload = require('express-fileupload');
+const MongoStore = require('connect-mongo')(session);
 
 const bookRoutes = require('../routes/books');
 const articleRoutes = require('../routes/articles');
 const authorRoutes = require('../routes/authors');
 const { User } = require('../../db');
+const { db } = require('../../db');
 
 if (process.env.NODE_ENV === 'development') require('../../env-secrets');
 
@@ -30,6 +32,7 @@ module.exports = (app, options) => {
     resave: false,
     saveUninitialized: true,
     expires: false,
+    store: new MongoStore({ mongooseConnection: db }),
   }));
 
   app.post('/api/login', async (req, res) => {
