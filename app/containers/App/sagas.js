@@ -1,10 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import moment from 'moment';
 import keys from 'lodash/keys';
 
 import request from 'utils/request';
 import { GET_BOOKS, GET_ONE_BOOK, CREATE_OR_UPDATE_BOOK, DELETE_BOOK, GET_AUTHOR, GET_ARTICLES, GET_ONE_ARTICLE, CREATE_OR_UPDATE_ARTICLE, DELETE_ARTICLE, LOGIN, LOGOUT, WHO_AM_I } from './constants';
 import { setBooks, setAuthor, setArticles, setOneBook, setOneArticle, setUser, setPostPutSuccess, setPostPutError, setLoading } from './actions';
+import { selectSelectedBook } from './selectors';
 
 export function* getBooks() {
   try {
@@ -28,16 +29,19 @@ export function* createOrUpdateBook({ bookValues }) {
   try {
     yield put(setLoading(true));
     const data = bookValues.toJS();
-    const formData = new FormData();
-    formData.append('file', data.img[0]);
-    formData.append('name', data.img[0].name);
-    if (data._id) formData.append('_id', data._id);
-    const imgUploadResult = yield call(request, '/api/books/image', {
-      credentials: 'same-origin',
-      method: data._id ? 'put' : 'post',
-      body: formData,
-    });
-    if (!imgUploadResult.ok) throw new Error('Image upload failed');
+    let imgUploadResult;
+    if (data.img && data.img[0]) {
+      const formData = new FormData();
+      formData.append('file', data.img[0]);
+      formData.append('name', data.img[0].name);
+      if (data._id) formData.append('_id', data._id);
+      imgUploadResult = yield call(request, '/api/books/image', {
+        credentials: 'same-origin',
+        method: data._id ? 'put' : 'post',
+        body: formData,
+      });
+      if (!imgUploadResult.ok) throw new Error('Image upload failed');
+    }
     const praise = keys(data)
       .filter((bookProp) => bookProp.match(/quoteBy/))
       .map((quote, index) => ({
@@ -46,10 +50,11 @@ export function* createOrUpdateBook({ bookValues }) {
       }))
       .filter(({ quote, quoteBy }) => quote && quoteBy);
     const { title, subtitle, isbn, description, publisher, url } = data;
+    const { imgSrc } = yield select(selectSelectedBook());
     const body = JSON.stringify({
       title,
       subtitle,
-      imgSrc: imgUploadResult.url,
+      imgSrc: imgUploadResult ? imgUploadResult.url : imgSrc,
       isbn,
       description,
       publisher,
