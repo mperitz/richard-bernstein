@@ -36,7 +36,14 @@ const selectAuthor = () => createSelector(
 
 const selectArticles = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('articles').toJS()
+  (homeState) => homeState.get('articles').sort(((current, next) => {
+    const currentDate = (new Date(current.get('date'))).getTime();
+    const nextDate = (new Date(next.get('date'))).getTime();
+    if (currentDate > nextDate) return -1;
+    if (currentDate < nextDate) return 1;
+    if (currentDate === nextDate) return 0;
+    return 0;
+  })).toJS()
 );
 
 const selectSelectedArticle = () => createSelector(
