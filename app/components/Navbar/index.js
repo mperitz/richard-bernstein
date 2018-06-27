@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Navbar as Container, Header, ButtonContainer, Button, ButtonText } from './styled';
+import { Navbar as Container, HeaderContainer, Header, SubHeader, ButtonContainer, Button, ButtonText } from './styled';
 import { Link } from '../common';
 import messages from './messages';
 
 const Navbar = ({ user, onLogout }) => (
   <Container>
     <Link to="/">
-      <Header>RICHARD BERNSTEIN</Header>
+      <HeaderContainer>
+        <Header>RICHARD BERNSTEIN</Header>
+        <SubHeader>Journalist & Author</SubHeader>
+      </HeaderContainer>
     </Link>
     <ButtonContainer>
       <Link to="/about">

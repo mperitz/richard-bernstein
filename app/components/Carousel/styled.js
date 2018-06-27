@@ -39,10 +39,6 @@ export const ArrowContainer = styled.div`
   position: absolute;
   top: ${({ arrowOffset }) => arrowOffset}px;
   z-index: 1;
-
-  @media (max-width: 700px) {
-    top: ${({ arrowOffset }) => arrowOffset * (3 / 4)}px;
-  }
 `;
 
 export const Arrow = styled.img`

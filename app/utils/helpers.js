@@ -32,3 +32,5 @@ export const flattenAuthor = ({ spotlight, _links }) => ({
   imgSrc: _links[0].href,
 });
 /* eslint-enable no-underscore-dangle */
+
+export const immutableIsValue = (item, key, value) => item.get(key) === value;
