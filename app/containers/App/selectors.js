@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { immutableIsValue } from '../../utils/helpers';
+
 const selectRoute = (state) => state.get('route');
 
 const makeSelectLocation = () => createSelector(
@@ -11,7 +13,12 @@ const selectHome = (state) => state.get('home');
 
 const selectBooks = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('books').toJS()
+  (homeState) => {
+    const books = homeState.get('books');
+    const withChina1945 = books.filter((book) => immutableIsValue(book, 'title', 'China 1945'));
+    const without = books.filter((book) => !immutableIsValue(book, 'title', 'China 1945'));
+    return withChina1945.concat(without).toJS();
+  }
 );
 
 const selectPraise = () => createSelector(
@@ -36,14 +43,14 @@ const selectAuthor = () => createSelector(
 
 const selectArticles = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('articles').sort(((current, next) => {
+  (homeState) => homeState.get('articles').sort((current, next) => {
     const currentDate = (new Date(current.get('date'))).getTime();
     const nextDate = (new Date(next.get('date'))).getTime();
     if (currentDate > nextDate) return -1;
     if (currentDate < nextDate) return 1;
     if (currentDate === nextDate) return 0;
     return 0;
-  })).toJS()
+  }).toJS()
 );
 
 const selectSelectedArticle = () => createSelector(

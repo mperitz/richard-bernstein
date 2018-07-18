@@ -11,7 +11,7 @@ const authorRoutes = require('../routes/authors');
 const { User } = require('../../db');
 const { db } = require('../../db');
 
-if (process.env.NODE_ENV === 'development') require('../../env-secrets');
+require('../../env-secrets');
 
 /**
  * Front-end middleware

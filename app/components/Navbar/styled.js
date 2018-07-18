@@ -12,6 +12,17 @@ export const Navbar = styled.div`
 
   @media (max-width: 700px) {
     flex-direction: column;
+    height: 125px;
+  }
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 700px) {
+    height: 80px;
   }
 `;
 
@@ -21,6 +32,11 @@ export const Header = styled.h1`
   font-family: 'Permanent Marker', cursive;
   font-size: 2em;
   cursor: pointer;
+`;
+
+export const SubHeader = styled.p`
+  margin: 0;
+  font-family: 'Permanent Marker';
 `;
 
 export const ButtonContainer = styled.div`
