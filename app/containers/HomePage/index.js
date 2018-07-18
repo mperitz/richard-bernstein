@@ -25,8 +25,7 @@ const HomePage = ({ books }) => (
   <Container>
     <Helmet>
       <title>Home - Richard Bernstein</title>
-      <meta property="og:url" content="" />
-      <meta property="books:author" content="a url here" />
+      <meta property="og:url" content="richardbernstein.net/" />
     </Helmet>
     <Carousel carouselArr={books} CarouselItem={CarouselItem} carouselHeight={500} slideTime={0.5} arrowOffset={330} />
     <ContentWrapper>

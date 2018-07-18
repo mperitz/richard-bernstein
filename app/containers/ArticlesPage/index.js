@@ -12,7 +12,7 @@ const ArticlesPage = ({ articles, handleDeleteClick, user }) => (
   <div>
     <Helmet>
       <title>Articles - Richard Bernstein</title>
-      <meta property="og:url" content="" />
+      <meta property="og:url" content="richardbernstein.net/articles" />
       <meta property="article:author" content="Richard Bernstein" />
       <meta property="article:tag" content={articles.map((article) => article.title).join(', ')} />
     </Helmet>

@@ -13,9 +13,9 @@ const BookPage = ({ books, match }) => {
     !!books.length && <div>
       <Helmet>
         <title>{`${selectedBook.title} - Richard Bernstein`}</title>
-        <meta property="og:url" content="" />
+        <meta property="og:url" content={`richardbernstein.net/${selectedBook._id}`} />
         <meta property="og:title" content={selectedBook.title} />
-        <meta property="book:tag" content="" />
+        <meta property="book:tag" content={selectedBook.imgSrc} />
       </Helmet>
       <Book selectedBook={selectedBook} />
     </div>
