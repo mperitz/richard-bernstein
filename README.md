@@ -1,3 +1,5 @@
+This project utilized react-boilerplate for development purposes.  Below is the README for react-boilerplate for help in navigating scaffolding, dependencies, etc.
+
 <img src="https://raw.githubusercontent.com/react-boilerplate/react-boilerplate-brand/master/assets/banner-metal-optimized.jpg" alt="react boilerplate banner" align="center" />
 
 <br />
